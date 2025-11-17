@@ -14,7 +14,20 @@ const divide = function(a, b) {
     return a / b;
 }
 
-console.log(add(2,5));
-console.log(subtract(10,17));
-console.log(multiply(4,22));
-console.log(divide(100,3));
+
+let numberA, numberB, operator;
+
+const operate = function(operator, numberA, numberB){
+    switch(operator){
+        case "+":
+            return add(numberA, numberB);
+        case "-":
+            return subtract(numberA, numberB);
+        case "*":
+            return multiply(numberA, numberB);
+        case "/":
+            return divide(numberA, numberB);
+        default:
+            return false;
+    }
+}
