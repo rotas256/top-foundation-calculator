@@ -17,17 +17,49 @@ const divide = function(a, b) {
 
 let numberA, numberB, operator;
 
-const operate = function(operator, numberA, numberB){
-    switch(operator){
+const operate = function(op, a, b){
+    switch(op){
         case "+":
-            return add(numberA, numberB);
+            return add(a, b);
         case "-":
-            return subtract(numberA, numberB);
+            return subtract(a, b);
         case "*":
-            return multiply(numberA, numberB);
+            return multiply(a, b);
         case "/":
-            return divide(numberA, numberB);
+            return divide(a, b);
         default:
             return false;
     }
 }
+
+const init = function(){
+    const calculator = document.querySelector("#calculator");
+    const buttons = document.querySelector("#buttons");
+
+    const addButton = function(name, label){
+        // const buttonAction = function(event){
+        //     const clickedButton = event.target.id;
+        //     if( Number(clickedButton) >= 0 && Number(clickedButton) <= 9 ){
+                
+        //     }
+        // };
+        const newButton = document.createElement("button");
+        newButton.textContent = (label)? label: name;
+        newButton.id = name;
+        newButton.classList.add("button");
+        // newButton.addEventListener('click', buttonAction(e));
+        buttons.appendChild(newButton);
+    };
+
+    for(let i=0; i<=9; i++){
+        addButton(i);
+    }
+    addButton("=");
+    addButton("+");
+    addButton("-");
+    addButton("*", "×");
+    addButton("/", "÷");
+    addButton("clear", "Clear");
+}
+
+init();
