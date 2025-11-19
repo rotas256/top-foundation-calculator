@@ -11,6 +11,7 @@ const multiply = function(a, b) {
 }
 
 const divide = function(a, b) {
+    if( b === 0 ) return NaN;
     return a / b;
 }
 
@@ -42,31 +43,65 @@ const calculator = function(){
         display.textContent = (buffer === '') ? '0' : buffer;
     }
 
-    const addButton = function(name, label){
-        const buttonAction = function(event){
-            const clickedButton = event.target.id;
-            if( Number(clickedButton) >= 0 && Number(clickedButton) <= 9 ){
-                buffer = (buffer === '0') ? clickedButton : buffer + clickedButton;
+    const clickNumber = function(clickedButton){
+        buffer = (buffer === '0') ? clickedButton : buffer + clickedButton;
+        updateDisplay();
+    }
+    const clickOperator = function(clickedButton){
+        if( numberA === null ){
+            numberA = Number(buffer);
+            buffer = '';
+            operator = clickedButton;
+        } else {
+            if( buffer === '' ){
+                operator = clickedButton;
+            } else {
+                numberB = Number(buffer);
+                buffer = String(operate(operator, numberA, numberB));
+                updateDisplay();
+                numberA = Number(buffer);
+                buffer = '';
+                numberB = null;
+                operator = clickedButton;
             }
-            updateDisplay();
-        };
+        }
+    }
+    const clickEqual = function(clickedButton){
+        if(operator === '') return;
+        numberB = Number(buffer);
+        buffer = String(operate(operator, numberA, numberB));
+        updateDisplay();
+        numberA = null;
+        operator = '';
+        numberB = null;
+        buffer = '';
+    }
+    const clickClear = function(clickedButton){
+        numberA = null;
+        numberB = null;
+        operator = '';
+        buffer = '';
+        updateDisplay();
+    }
+
+    const addButton = function(callback, name, label){
         const newButton = document.createElement("button");
         newButton.textContent = (label)? label: name;
         newButton.id = name;
         newButton.classList.add("button");
-        newButton.addEventListener('click', (e) => buttonAction(e));
+        newButton.addEventListener('click', (e) => callback(e.target.id));
         buttons.appendChild(newButton);
     };
 
     for(let i=0; i<=9; i++){
-        addButton(i);
+        addButton(clickNumber, i);
     }
-    addButton("=");
-    addButton("+");
-    addButton("-");
-    addButton("*", "×");
-    addButton("/", "÷");
-    addButton("clear", "Clear");
+    addButton(clickEqual, "=");
+    addButton(clickOperator, "+");
+    addButton(clickOperator, "-");
+    addButton(clickOperator, "*", "×");
+    addButton(clickOperator, "/", "÷");
+    addButton(clickClear, "clear", "Clear");
 }
 
 calculator();
