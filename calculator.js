@@ -47,6 +47,11 @@ const calculator = function(){
         buffer = (buffer === '0') ? clickedButton : buffer + clickedButton;
         updateDisplay();
     }
+    const clickDot = function(clickedButton){
+        if( buffer.includes('.') ) return;
+        buffer = (buffer === '0' || buffer === '') ? '0.' : buffer + '.';
+        updateDisplay();
+    }
     const clickOperator = function(clickedButton){
         if( numberA === null ){
             numberA = Number(buffer);
@@ -96,11 +101,12 @@ const calculator = function(){
     for(let i=0; i<=9; i++){
         addButton(clickNumber, i);
     }
-    addButton(clickEqual, "=");
+    addButton(clickDot, ".");
     addButton(clickOperator, "+");
     addButton(clickOperator, "-");
     addButton(clickOperator, "*", "×");
     addButton(clickOperator, "/", "÷");
+    addButton(clickEqual, "=");
     addButton(clickClear, "clear", "Clear");
 }
 
