@@ -88,6 +88,10 @@ const calculator = function(){
         buffer = '';
         updateDisplay();
     }
+    const clickBackspace = function(clickedButton){
+        buffer = buffer.slice(0, buffer.length-1);
+        updateDisplay();
+    }
 
     const addButton = function(callback, name, label){
         const newButton = document.createElement("button");
@@ -107,6 +111,7 @@ const calculator = function(){
     addButton(clickOperator, "*", "×");
     addButton(clickOperator, "/", "÷");
     addButton(clickEqual, "=");
+    addButton(clickBackspace, "backspace", "BS");
     addButton(clickClear, "clear", "Clear");
 }
 
