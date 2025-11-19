@@ -14,9 +14,6 @@ const divide = function(a, b) {
     return a / b;
 }
 
-
-let numberA, numberB, operator;
-
 const operate = function(op, a, b){
     switch(op){
         case "+":
@@ -32,22 +29,32 @@ const operate = function(op, a, b){
     }
 }
 
-const init = function(){
+const calculator = function(){
     const calculator = document.querySelector("#calculator");
+    const display = document.querySelector("#display");
     const buttons = document.querySelector("#buttons");
+    let numberA = null;
+    let numberB = null;
+    let operator = '';
+    let buffer = '';
+
+    const updateDisplay = function(){
+        display.textContent = (buffer === '') ? '0' : buffer;
+    }
 
     const addButton = function(name, label){
-        // const buttonAction = function(event){
-        //     const clickedButton = event.target.id;
-        //     if( Number(clickedButton) >= 0 && Number(clickedButton) <= 9 ){
-                
-        //     }
-        // };
+        const buttonAction = function(event){
+            const clickedButton = event.target.id;
+            if( Number(clickedButton) >= 0 && Number(clickedButton) <= 9 ){
+                buffer = (buffer === '0') ? clickedButton : buffer + clickedButton;
+            }
+            updateDisplay();
+        };
         const newButton = document.createElement("button");
         newButton.textContent = (label)? label: name;
         newButton.id = name;
         newButton.classList.add("button");
-        // newButton.addEventListener('click', buttonAction(e));
+        newButton.addEventListener('click', (e) => buttonAction(e));
         buttons.appendChild(newButton);
     };
 
@@ -62,4 +69,4 @@ const init = function(){
     addButton("clear", "Clear");
 }
 
-init();
+calculator();
