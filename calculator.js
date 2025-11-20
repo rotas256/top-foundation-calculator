@@ -113,6 +113,20 @@ const calculator = function(){
     addButton(clickEqual, "=");
     addButton(clickBackspace, "backspace", "BS");
     addButton(clickClear, "clear", "Clear");
+    
+    document.addEventListener("keydown", (e) =>{
+        if( Number(e.key) >= 0 && Number(e.key) <= 9 ) clickNumber(e.key);
+        else if( e.key === '.' ) clickDot(e.key);
+        else if( 
+                e.key === '+' ||
+                e.key === '-' ||
+                e.key === '*' ||
+                e.key === '/' 
+            ) clickOperator(e.key);
+        else if( e.key === 'Enter' ) clickEqual('=');
+        else if( e.key === 'Backspace' ) clickBackspace('backspace');
+        else if( e.key === 'Delete' ) clickClear('clear');
+    });
 }
 
 calculator();
