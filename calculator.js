@@ -40,7 +40,15 @@ const calculator = function(){
     let buffer = '';
 
     const updateDisplay = function(){
-        display.textContent = (buffer === '') ? '0' : buffer;
+        const formatter = new Intl.NumberFormat('ja-JP');
+        const splitBuffer = buffer.split('.');
+        const integerPart = formatter.format(Number(splitBuffer[0]));
+        if( buffer.includes('.') ){
+            const fractionalPart = buffer.split('.')[1];
+            display.textContent = integerPart+'.'+fractionalPart;
+        } else {
+            display.textContent = integerPart;
+        }
     }
 
     const clickNumber = function(clickedButton){
