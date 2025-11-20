@@ -15,16 +15,23 @@ const divide = function(a, b) {
     return a / b;
 }
 
+const round = function(num){
+    const MaxDecimalPlace = 10;
+    let integer = num * (10 ** MaxDecimalPlace);
+    integer = Math.round(integer);
+    return integer / (10 ** MaxDecimalPlace);
+}
+
 const operate = function(op, a, b){
     switch(op){
         case "+":
-            return add(a, b);
+            return round(add(a, b));
         case "-":
-            return subtract(a, b);
+            return round(subtract(a, b));
         case "*":
-            return multiply(a, b);
+            return round(multiply(a, b));
         case "/":
-            return divide(a, b);
+            return round(divide(a, b));
         default:
             return false;
     }
