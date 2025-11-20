@@ -47,14 +47,19 @@ const calculator = function(){
     let buffer = '';
 
     const updateDisplay = function(){
-        const formatter = new Intl.NumberFormat('ja-JP');
-        const splitBuffer = buffer.split('.');
-        const integerPart = formatter.format(Number(splitBuffer[0]));
-        if( buffer.includes('.') ){
-            const fractionalPart = buffer.split('.')[1];
-            display.textContent = integerPart+'.'+fractionalPart;
+        const MaxNum = 1.0e+10;
+        if( Number(buffer) > MaxNum ){
+            display.textContent = Number(buffer).toExponential(6);
         } else {
-            display.textContent = integerPart;
+            const formatter = new Intl.NumberFormat('ja-JP');
+            const splitBuffer = buffer.split('.');
+            const integerPart = formatter.format(Number(splitBuffer[0]));
+            if( buffer.includes('.') ){
+                const fractionalPart = buffer.split('.')[1];
+                display.textContent = integerPart+'.'+fractionalPart;
+            } else {
+                display.textContent = integerPart;
+            }    
         }
     }
 
