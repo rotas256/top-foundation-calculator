@@ -96,9 +96,10 @@ const calculator = function(){
     const addButton = function(callback, name, label){
         const newButton = document.createElement("button");
         newButton.textContent = (label)? label: name;
-        newButton.id = name;
+        newButton.type = "button";
+        newButton.name = name;
         newButton.classList.add("button");
-        newButton.addEventListener('click', (e) => callback(e.target.id));
+        newButton.addEventListener('click', (e) => callback(e.target.name));
         buttons.appendChild(newButton);
     };
 

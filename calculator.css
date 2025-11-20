@@ -15,4 +15,75 @@
    color: #FFF;
    background-color: #000;
    text-align: end;
+   font-size: 1.2rem;
+}
+
+
+#buttons{
+    display: grid;
+    grid-template-areas:
+        "add subtract multiply divide"
+        "seven eight nine clear"
+        "four five six backspace"
+        "one two three equal"
+        "zero zero dot equal";
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+}
+.button{
+    font-size: 1.2rem;
+}
+.button[name="0"]{
+    grid-area: zero;
+}
+.button[name="1"]{
+    grid-area: one;
+}
+.button[name="2"]{
+    grid-area: two;
+}
+.button[name="3"]{
+    grid-area: three;
+}
+.button[name="4"]{
+    grid-area: four;
+}
+.button[name="5"]{
+    grid-area: five;
+}
+.button[name="6"]{
+    grid-area: six;
+}
+.button[name="7"]{
+    grid-area: seven;
+}
+.button[name="8"]{
+    grid-area: eight;
+}
+.button[name="9"]{
+    grid-area: nine;
+}
+.button[name="."]{
+    grid-area: dot;
+}
+.button[name="+"]{
+    grid-area: add;
+}
+.button[name="-"]{
+    grid-area: subtract;
+}
+.button[name="*"]{
+    grid-area: multiply;
+}
+.button[name="/"]{
+    grid-area: divide;
+}
+.button[name="backspace"]{
+    grid-area: backspace;
+}
+.button[name="clear"]{
+    grid-area: clear;
+}
+.button[name="="]{
+    grid-area: equal;
 }
